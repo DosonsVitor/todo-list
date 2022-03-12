@@ -1,3 +1,3 @@
 # Todo List :heavy_check_mark:
 
-Todo List em Javascript puro aperfeiçoamento de conhecimentos da linguagem
+Todo List simples em Javascript puro para o aperfeiçoamento de conhecimentos da linguagem
