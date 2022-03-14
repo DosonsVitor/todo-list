@@ -1,7 +1,5 @@
 var tarefas = [];
 
-atualizarTarefas();
-
 document.querySelector("form").addEventListener("submit", event => {
 	
 	novaTarefa();
@@ -14,8 +12,6 @@ document.querySelector("form").addEventListener("submit", event => {
 
 function novaTarefa()
 {
-    const listaTarefas = document.getElementById("lista_tarefas");
-
     var tarefa = {
         descricao: form.inputTarefa.value,
         hora: form.inputHora.value,
