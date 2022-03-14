@@ -1,68 +1,68 @@
-var tarefas = [];
+var Tasks = [];
 
 document.querySelector("form").addEventListener("submit", event => {
 	
-	novaTarefa();
+	NewTask();
 
-    form.inputTarefa.value = "";
-    form.inputHora.value = null;
+    form.InputTask.value = "";
+    form.InputTime.value = null;
 
 	event.preventDefault();
 });
 
-function novaTarefa()
+function NewTask()
 {
-    var tarefa = {
-        descricao: form.inputTarefa.value,
-        hora: form.inputHora.value,
+    var Task = {
+        descricao: form.InputTask.value,
+        hora: form.InputTime.value,
         id: gerarId(),
         status: "open" };
 
-    tarefas.unshift(tarefa);
+    Tasks.unshift(Task);
 
-    atualizarTarefas();
+    UpdateTasks();
 }
 
-function atualizarTarefas()
+function UpdateTasks()
 {
-    var listaTarefas = document.getElementById("all");
+    var TaskList = document.getElementById("all");
     
-    gerarLinhas(listaTarefas, tarefas);
+    gerarLinhas(TaskList, Tasks);
 
     ['open', 'closed', 'canceled'].forEach(locale => atualizarLocale(locale));
 }
 
 function check(id)
 {
-    if(tarefas.filter(tarefa => tarefa.id == id)[0].status == "open")
+    if(Tasks.filter(Task => Task.id == id)[0].status == "open")
     {
         document.getElementById("checkId_"+id).src = "./img/check.png";
-        tarefas.filter(tarefa => tarefa.id == id)[0].status = "closed";
+        Tasks.filter(Task => Task.id == id)[0].status = "closed";
     }
-    else if (tarefas.filter(tarefa => tarefa.id == id)[0].status == "closed")
+    else if (Tasks.filter(Task => Task.id == id)[0].status == "closed")
     {
         document.getElementById("checkId_"+id).src = "./img/uncheck.png";
-        tarefas.filter(tarefa => tarefa.id == id)[0].status = "open";
+        Tasks.filter(Task => Task.id == id)[0].status = "open";
     }
 
-    atualizarTarefas();
+    UpdateTasks();
 }
 
 function cancel(id)
 {
-    if(tarefas.filter(tarefa => tarefa.id == id)[0].status == "canceled")
+    if(Tasks.filter(Task => Task.id == id)[0].status == "canceled")
     {
-        tarefas.filter(tarefa => tarefa.id == id)[0].status = "closed";
+        Tasks.filter(Task => Task.id == id)[0].status = "closed";
         document.getElementById("cancelId_"+id).src = "./img/cross.png";
         check(id);
     }
     else
     {
-        tarefas.filter(tarefa => tarefa.id == id)[0].status = "canceled";
+        Tasks.filter(Task => Task.id == id)[0].status = "canceled";
         document.getElementById("checkId_"+id).src = "./img/cross_blue.png";
         document.getElementById("cancelId_"+id).src = "./img/up.png";
     }
-    atualizarTarefas();
+    UpdateTasks();
 }
 
 function gerarId()
@@ -81,26 +81,26 @@ function change(locale)
     document.getElementById(locale).style.display = 'block';
 
     atualizarLocale(locale);
-    atualizarTarefas();
+    UpdateTasks();
 }
 
 function atualizarLocale(locale)
 {
-    var listaTarefas = document.getElementById(locale);
-    gerarLinhas(listaTarefas, tarefas.filter(tarefa => tarefa.status == locale));
+    var TaskList = document.getElementById(locale);
+    gerarLinhas(TaskList, Tasks.filter(Task => Task.status == locale));
 }
 
-function gerarLinhas(listaTarefas, array)
+function gerarLinhas(TaskList, array)
 {
     var checkImg, cancelImg;
-    listaTarefas.innerHTML = "";
-    array.forEach((tarefa) => {
-        if(tarefa.status == "open")
+    TaskList.innerHTML = "";
+    array.forEach((Task) => {
+        if(Task.status == "open")
         {
             checkImg = "./img/uncheck.png";
             cancelImg = "./img/cross.png";
         }
-        else if(tarefa.status == "closed")
+        else if(Task.status == "closed")
         {
             checkImg = "./img/check.png";
             cancelImg = "./img/cross.png";
@@ -110,15 +110,15 @@ function gerarLinhas(listaTarefas, array)
             checkImg = "./img/cross_blue.png";
             cancelImg = "./img/up.png"
         }
-        listaTarefas.innerHTML += `
+        TaskList.innerHTML += `
             <li>
-            <button onclick="check('${tarefa.id}')">
-                <img id="checkId_${tarefa.id}" src=${checkImg} alt="icon"/>
+            <button onclick="check('${Task.id}')">
+                <img id="checkId_${Task.id}" src=${checkImg} alt="icon"/>
             </button>
-            <p id="descricao" class="${tarefa.status}">${tarefa.descricao}</p>
+            <p id="descricao" class="${Task.status}">${Task.descricao}</p>
             <img src="./img/time.png" alt="icon"/>
-            <p id="hora">${tarefa.hora}</p>
-            <button onclick="cancel('${tarefa.id}')"><img id="cancelId_${tarefa.id}" src=${cancelImg} alt="icon"/></button>
+            <p id="hora">${Task.hora}</p>
+            <button onclick="cancel('${Task.id}')"><img id="cancelId_${Task.id}" src=${cancelImg} alt="icon"/></button>
             </li>
         `;
     });

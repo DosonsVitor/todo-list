@@ -11,20 +11,20 @@
         <div id="background">
             <header>
                 <h1>
-                    Lista de tarefas
+                    Lista de Tasks
                 </h1>
-                <form name="form" action="" id="new_tarefa">
+                <form name="form" action="" id="NewTask">
                     <button type="submit">
                         <img src="img/plus.png" alt="icon">
                     </button>
-                    <input type="text" name="inputTarefa" id="input_new_tarefa" placeholder="Nova tarefa" required>
+                    <input type="text" name="InputTask" id="InputNewTask" placeholder="New Task" required>
                     <img src="img/time.png" alt="icon">
-                    <input type="time" name="inputHora" id="input_hora" required>
+                    <input type="time" name="InputTime" id="InputTime" required>
                 </form>
             </header>
 
             
-            <div id="tarefas" class="all">
+            <div id="Tasks" class="all">
                 <div id="menu">
                     <button onclick="change('all')">All</button>
                     <button onclick="change('open')">Open</button>
@@ -32,19 +32,19 @@
                     <button onclick="change('canceled')">Canceled</button>
                 </div>
     
-                <ul class="lista_tarefas" id="all">
+                <ul class="TaskList" id="all">
                    
                 </ul>
             
-                <ul class="lista_tarefas" id="open">
+                <ul class="TaskList" id="open">
                    
                 </ul>
             
-                <ul class="lista_tarefas" id="closed">
+                <ul class="TaskList" id="closed">
                    
                 </ul>
             
-                <ul class="lista_tarefas" id="canceled">
+                <ul class="TaskList" id="canceled">
                    
                 </ul>
             </div>
